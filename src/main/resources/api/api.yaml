@@ -1,0 +1,75 @@
+swagger: "2.0"
+info:
+  description: "This api refers to Bradesco's test"
+  version: "1.0.0"
+  title: "Consulta endereço API"
+  termsOfService: "tbd"
+  contact:
+    email: "carlos.swamy@gmail.com"
+host: "teste"
+basePath: "/v1"
+tags:
+- name: "Consultas"
+  description: "Operações consulta"
+#  externalDocs:
+#    description: "Find out more about our store"
+#    url: "http://swagger.io"
+schemes:
+- "https"
+- "http"
+
+paths:
+
+  /consulta/CEP:
+    post:
+      tags:
+      - "Consultas"
+      summary: "Retorna endereço pelo CEP"
+      description: "Retorna endereço pelo CEP. Fornecer o cep em formato numerico apenas (Ex. 52051280)"
+      operationId: "consultarEndereço"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "cep"
+        description: "cep"
+        required: true
+        schema:
+          $ref: "#/definitions/ConsultaCEPRequestDTO"
+      responses:
+        200:
+          description: "Endereço Localizado"
+          schema:
+            $ref: "#/definitions/EnderecoResponseDTO"
+    
+definitions:
+
+  EnderecoResponseDTO:
+    type: "object"
+    description: "Data transfer object para endereço."
+    properties:
+      cep:
+        type: "string"
+      rua:
+        type: "string"
+      complemento:
+        type: "string"
+      bairro:
+        type: "string"
+      cidade:
+        type: "string"
+      estado:
+        type: "string"
+      preco:
+        type: "number"
+        format: "double"
+
+  ConsultaCEPRequestDTO:
+    type: "object"
+    description: "Data transfer object para cep."
+    properties: 
+      cep:
+        type: "string"
+  
