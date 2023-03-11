@@ -7,20 +7,23 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.HttpClientErrorException;
-
 import java.util.Optional;
 
 @Service
 public class ConsultaEnderecoServiceImpl implements ConsultaEnderecoService{
 
-    @Autowired
     RestTemplateClient restTemplateClient;
+
+    @Autowired
+    public ConsultaEnderecoServiceImpl(RestTemplateClient restTemplateClient) {
+        this.restTemplateClient = restTemplateClient;
+    }
 
     @Override
     public EnderecoResponseDTO getEnderecoPorCep(String cep) {
-        ViaCep viaCep = restTemplateClient.getEnderecoCep(cep.replace("-",""));
+        ViaCep viaCep = restTemplateClient.getEnderecoCep(cep);
         if(Optional.ofNullable(viaCep.getErro()).isPresent()){
-            throw new HttpClientErrorException(HttpStatus.NOT_FOUND, "Erro - Cep Não Encontrado, Verifique o CEP");
+            throw new HttpClientErrorException(HttpStatus.NOT_FOUND);
         }
         return buildResponse(viaCep);
     }

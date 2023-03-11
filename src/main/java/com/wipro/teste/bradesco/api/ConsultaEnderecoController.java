@@ -16,12 +16,16 @@ import org.springframework.web.server.ResponseStatusException;
 @Controller
 public class ConsultaEnderecoController implements ConsultaApi {
 
-    @Autowired
     ConsultaEnderecoService consultaEnderecoService;
+
+    @Autowired
+    public ConsultaEnderecoController(ConsultaEnderecoService consultaEnderecoService) {
+        this.consultaEnderecoService = consultaEnderecoService;
+    }
 
     @Override
     @PostMapping("v1/consulta-endereco")
-    public ResponseEntity<EnderecoResponseDTO> consultarEndereo(ConsultaCEPRequestDTO cep) {
+    public ResponseEntity<EnderecoResponseDTO> consultarEndereco(ConsultaCEPRequestDTO cep) {
         try{
             return new ResponseEntity<>(consultaEnderecoService.getEnderecoPorCep(cep.getCep()), HttpStatus.OK);
         }catch(HttpClientErrorException e){
