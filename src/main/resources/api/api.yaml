@@ -20,7 +20,7 @@ schemes:
 
 paths:
 
-  /consulta/CEP:
+  /v1/consulta/CEP:
     post:
       tags:
       - "Consultas"
@@ -37,7 +37,7 @@ paths:
         description: "cep"
         required: true
         schema:
-          $ref: "#/definitions/ConsultaCEPRequestDTO"
+          $ref: "#/definitions/ConsultaCepRequestDTO"
       responses:
         200:
           description: "Endereço Localizado"
@@ -66,7 +66,7 @@ definitions:
         type: "number"
         format: "double"
 
-  ConsultaCEPRequestDTO:
+  ConsultaCepRequestDTO:
     type: "object"
     description: "Data transfer object para cep."
     properties: 

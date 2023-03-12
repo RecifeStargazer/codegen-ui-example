@@ -1,13 +1,11 @@
 Feature: Consultar preco frete por cep
-  Scenario: Consultar Cep valido com hifen
-    Given Consulto Cep com Hifen
-    When Envio uma request com o "Cep"
-    Then O endereco e retornado
-  Scenario: Consultar "Cep" valido sem hifen
-    Given Consulto Cep sem Hifen
-    When Envio uma request com o "Cep"
-    Then O endereco e retornado
-  Scenario: Consultar Cep invalido
-    Given Consulto Cep invalido
-    When Envio uma request com o "Cep"
-    Then Erro "404" e retornado
+
+  Scenario Outline: Consultar Cep valido com hifen
+    Given Consulto cep
+    When Envio uma request com o <cep>
+    Then E retornado o <status>
+    Examples:
+      | cep           | status  |
+      | "52051280"    | 200     |
+      | "52051-280"   | 200     |
+      | "52051-2800"  | 404     |
