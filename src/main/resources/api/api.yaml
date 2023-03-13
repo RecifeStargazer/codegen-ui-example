@@ -72,4 +72,6 @@ definitions:
     properties: 
       cep:
         type: "string"
+    required:
+      - cep
   
