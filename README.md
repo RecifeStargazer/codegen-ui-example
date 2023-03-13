@@ -2,9 +2,13 @@
 
 This is a exercise of how use swagger codegen and swagger ui together. 
 
-To use it: 
+## To use it: 
+
+### requires maven 3.6.1 and java 11
 
 ### mvn clean install
+
+### make sure that target folder is marked as source
 
 ### then start the springboot application.
 
@@ -18,9 +22,13 @@ You can check the Automated and unit tests on ### maven install ### logs and als
 
 Este é um exercício de como usar o swagger codegen e o swagger ui juntos.
 
-Para usá-lo:
+## Para usá-lo:
+
+### requer maven 3.6.1 e java 11
 
 ### mvn clean install
+
+### certifique-se que a pasta target está marcada como source
 
 ### em seguida, inicie a aplicação springboot..
 
