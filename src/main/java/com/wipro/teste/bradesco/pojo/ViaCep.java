@@ -2,6 +2,7 @@ package com.wipro.teste.bradesco.pojo;
 
 import java.io.Serializable;
 
+//Lombok não funcionou na desserialização aqui. Não perdi tempo
 public class ViaCep implements Serializable {
 
     private String cep;

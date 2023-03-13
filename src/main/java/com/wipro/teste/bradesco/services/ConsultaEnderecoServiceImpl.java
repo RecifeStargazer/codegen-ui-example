@@ -22,12 +22,13 @@ public class ConsultaEnderecoServiceImpl implements ConsultaEnderecoService{
     @Override
     public EnderecoResponseDTO getEnderecoPorCep(String cep) {
         ViaCep viaCep = restTemplateClient.getEnderecoCep(cep);
+        //Se o cep tem numero de caracteres certo mas nao existe, não lança exceção http(Deveria). Tratado aqui no service.
         if(Optional.ofNullable(viaCep.getErro()).isPresent()){
             throw new HttpClientErrorException(HttpStatus.NOT_FOUND);
         }
         return buildResponse(viaCep);
     }
-    //Até onde sei o swagger codegen não suporta builder pattern. Por isso essa feiura.
+    //Até onde sei o swagger codegen não suporta builder pattern. Por isso essa feiura. Não tive tempo de solucionar isso.
     private EnderecoResponseDTO buildResponse(ViaCep viaCep){
         EnderecoResponseDTO responseDTO = new EnderecoResponseDTO();
         responseDTO.setBairro(viaCep.getBairro());
