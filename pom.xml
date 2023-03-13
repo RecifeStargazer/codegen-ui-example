@@ -22,7 +22,7 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
-		<!--tests-->
+		<!--mockito-->
 		<dependency>
 			<groupId>org.mockito</groupId>
 			<artifactId>mockito-core</artifactId>
@@ -35,9 +35,17 @@
 			<version>4.6.1</version>
 			<scope>test</scope>
 		</dependency>
+		<!-- Junit 5 -->
 		<dependency>
 			<groupId>org.junit.jupiter</groupId>
 			<artifactId>junit-jupiter-engine</artifactId>
+			<version>5.7.0</version>
+			<scope>test</scope>
+		</dependency>
+		<!-- Gambiarra pra rodar o cucumber, já que não é nativamente compatível com Junit5/Jupyter-->
+		<dependency>
+			<groupId>org.junit.vintage</groupId>
+			<artifactId>junit-vintage-engine</artifactId>
 			<version>5.7.0</version>
 			<scope>test</scope>
 		</dependency>
@@ -82,7 +90,29 @@
 	</dependencies>
 
 	<build>
+		<!-- gambiarra pra rodar cucumber no junit 5 -->
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-surefire-plugin</artifactId>
+					<version>3.0.0-M9</version>
+					<configuration>
+						<includes>
+							<include>**/*TestIT</include>
+							<include>**/*Test</include>
+						</includes>
+					</configuration>
+				</plugin>
+			</plugins>
+		</pluginManagement>
 		<plugins>
+			<!-- gambiarra pra rodar cucumber no junit 5 -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<version>3.0.0-M9</version>
+			</plugin>
 			<!-- Gerando código através do contrato yaml usando swagger codegen -->
 			<plugin>
 				<groupId>org.openapitools</groupId>
